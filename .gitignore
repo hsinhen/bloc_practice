@@ -1,0 +1,13 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub-cache/
+build/
+*.lock
+
+# IDEs
+.idea/
+.vscode/
+
+# macOS/Linux build files
+*.DS_Store
