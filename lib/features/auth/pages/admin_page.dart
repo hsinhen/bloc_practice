@@ -4,18 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../auth_bloc.dart';
 import '../user_model.dart';
 
-class HomePage extends StatelessWidget {
+class AdminPage extends StatelessWidget {
   final User user;
-  const HomePage({required this.user});
+  const AdminPage({required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home - ${user.name}'),
+        title: Text('Admin Panel - ${user.name}'),
         actions: [IconButton(icon: Icon(Icons.logout), onPressed: () => context.read<AuthBloc>().add(LogoutRequested()))],
       ),
-      body: Center(child: Text('Welcome back, ${user.name}', style: TextStyle(fontSize: 24))),
+      body: Center(child: Text('Welcome ${user.name}', style: TextStyle(fontSize: 24))),
     );
   }
 }

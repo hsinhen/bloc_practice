@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/auth/auth_bloc.dart';
+import 'features/auth/pages/admin_page.dart';
 import 'features/auth/pages/home_page.dart';
 import 'features/auth/pages/login_page.dart';
 import 'features/auth/pages/splash_page.dart';
@@ -17,12 +18,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      title: 'Role-Based Auth',
       home: BlocBuilder<AuthBloc, AuthState>(
         builder: (context, state) {
-          if (state is Authenticated) return HomePage();
-          if (state is Unauthenticated) return LoginPage();
-          return SplashScreen();
+          if (state is AuthInitial || state is AuthLoading) {
+            return SplashScreen();
+          } else if (state is Authenticated) {
+            if (state.user.role == 'admin') {
+              return AdminPage(user: state.user);
+            } else {
+              return HomePage(user: state.user);
+            }
+          } else {
+            return LoginPage();
+          }
         },
       ),
     );
